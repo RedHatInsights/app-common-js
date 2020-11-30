@@ -14,7 +14,7 @@ class Config {
                 return tmpobj.name
             }
         }
-    }  
+    }
 
     LoadedConfig() {
         return Config.data;
