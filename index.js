@@ -1,4 +1,5 @@
 const fs = require('fs');
+const tmp = require('tmp');
 
 class Config {
     constructor() {
@@ -7,6 +8,11 @@ class Config {
             let rawdata = fs.readFileSync(process.env.ACG_CONFIG);
             let jsonObject = JSON.parse(rawdata);
             Config.data = jsonObject;
+            Config.data.rdsCa = function () {
+                const tmpobj = tmp.fileSync({ mode: 0o644, prefix: 'prefix-', postfix: '.txt' });
+                fs.writeFileSync(tmpobj.name, Config.data.database.rdsCa, 'utf8')
+                return tmpobj.name
+            }
         }
     }  
 

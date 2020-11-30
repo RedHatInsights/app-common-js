@@ -1,3 +1,6 @@
+const { fileSync } = require('tmp');
+const fs = require('fs');
+
 var expect = require('chai').expect;
 
 describe('config()', function () {
@@ -11,5 +14,7 @@ describe('config()', function () {
     expect(config.DependencyEndpoints["app1"]["endpoint1"].port).to.be.equal(8000)
     expect(config.DependencyEndpoints["app2"]["endpoint2"].name).to.be.equal("endpoint2")
     expect(config.ObjectBuckets["reqname"].name).to.be.equal("name")
+    data = fs.readFileSync(config.LoadedConfig.rdsCa(), "utf8")
+    expect(data).to.be.equal("ca")
   });
 });

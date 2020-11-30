@@ -14,5 +14,8 @@
   "devDependencies": {
     "chai": "^4.1.1",
     "mocha": "^3.5.0"
+  },
+  "dependencies": {
+    "tmp": "^0.2.1"
   }
 }
