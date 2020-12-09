@@ -32,6 +32,18 @@ class Config {
         return topics;
     }
 
+    KafkaServers() {
+        var brokers = new(Array);
+        var i;
+        if (Config.data.kafka){
+            for (i = 0; i < Config.data.kafka.brokers.length; i++) {
+                let curBroker = Config.data.kafka.brokers[i].hostname + ":" + Config.data.kafka.brokers[i].port;
+                brokers.push(curBroker);
+            } 
+        }
+        return brokers;
+    }
+
     ObjectBuckets() {
         var buckets = new(Map);
         var i;
@@ -64,5 +76,6 @@ cfg = new(Config)
 
 module.exports.LoadedConfig = cfg.LoadedConfig();
 module.exports.KafkaTopics = cfg.KafkaTopics();
+module.exports.KafkaServers = cfg.KafkaServers();
 module.exports.ObjectBuckets = cfg.ObjectBuckets();
 module.exports.DependencyEndpoints = cfg.DependencyEndpoints();

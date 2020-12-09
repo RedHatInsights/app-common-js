@@ -14,6 +14,7 @@ describe('config()', function () {
     expect(config.DependencyEndpoints["app1"]["endpoint1"].port).to.be.equal(8000)
     expect(config.DependencyEndpoints["app2"]["endpoint2"].name).to.be.equal("endpoint2")
     expect(config.ObjectBuckets["reqname"].name).to.be.equal("name")
+    expect(config.KafkaServers[0]).to.be.equal("broker-host:27015")
     data = fs.readFileSync(config.LoadedConfig.rdsCa(), "utf8")
     expect(data).to.be.equal("ca")
   });
