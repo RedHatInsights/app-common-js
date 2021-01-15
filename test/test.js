@@ -18,5 +18,6 @@ describe('config()', function () {
     data = fs.readFileSync(config.LoadedConfig.rdsCa(), "utf8")
     expect(data).to.be.equal("ca")
     expect(config.IsClowderEnabled()).to.be.equal(true)
+    expect(config.LoadedConfig.featureFlags.hostname).to.be.equal("ff-server.server.example.com")
   });
 });
