@@ -17,5 +17,6 @@ describe('config()', function () {
     expect(config.KafkaServers[0]).to.be.equal("broker-host:27015")
     data = fs.readFileSync(config.LoadedConfig.rdsCa(), "utf8")
     expect(data).to.be.equal("ca")
+    expect(config.IsClowderEnabled()).to.be.equal(true)
   });
 });
