@@ -72,6 +72,10 @@ class Config {
     }
 }
 
+function IsClowderEnabled() {
+    return Boolean(process.env.ACG_CONFIG)
+}
+
 cfg = new(Config)
 
 module.exports.LoadedConfig = cfg.LoadedConfig();
@@ -79,3 +83,4 @@ module.exports.KafkaTopics = cfg.KafkaTopics();
 module.exports.KafkaServers = cfg.KafkaServers();
 module.exports.ObjectBuckets = cfg.ObjectBuckets();
 module.exports.DependencyEndpoints = cfg.DependencyEndpoints();
+module.exports.IsClowderEnabled = IsClowderEnabled;
