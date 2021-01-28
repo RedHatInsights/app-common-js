@@ -22,53 +22,58 @@ class Config {
 
     KafkaTopics() {
         var topics = new(Map);
-        var i;
         if (Config.data.kafka){
-            for (i = 0; i < Config.data.kafka.topics.length; i++) {
-                let curTopic = Config.data.kafka.topics[i];
-                topics[curTopic.requestedName] = curTopic;
-            } 
+            Config.data.kafka.topics.forEach(function (val){
+                topics[val.requestedName] = val;
+            })
         }
         return topics;
     }
 
     KafkaServers() {
         var brokers = new(Array);
-        var i;
         if (Config.data.kafka){
-            for (i = 0; i < Config.data.kafka.brokers.length; i++) {
-                let curBroker = Config.data.kafka.brokers[i].hostname + ":" + Config.data.kafka.brokers[i].port;
-                brokers.push(curBroker);
-            } 
+            Config.data.kafka.brokers.forEach(function (val){
+                brokers.push(val.hostname + ":" + val.port)
+            })
         }
         return brokers;
     }
 
     ObjectBuckets() {
         var buckets = new(Map);
-        var i;
         if (Config.data.objectStore){
-            for (i = 0; i < Config.data.objectStore.buckets.length; i++) {
-                let curBucket = Config.data.objectStore.buckets[i];
-                buckets[curBucket.requestedName] = curBucket;
-            } 
+            Config.data.objectStore.buckets.forEach(function (val){
+                buckets[val.requestedName] = val
+            })
         }
         return buckets;
     }
 
     DependencyEndpoints() {
         var dependencyEndpoints = new(Map);
-        var i;
         if (Config.data.endpoints){
-            for(i = 0; i < Config.data.endpoints.length; i++){
-                let curEndpoint = Config.data.endpoints[i];
-                if (!dependencyEndpoints.has(curEndpoint.app)) {
-                    dependencyEndpoints[curEndpoint.app] = new(Map);
+            Config.data.endpoints.forEach(function (val){
+                if (!dependencyEndpoints.has(val.app)) {
+                    dependencyEndpoints[val.app] = new(Map);
                 }
-                dependencyEndpoints[curEndpoint.app][curEndpoint.name] = curEndpoint;
-            }
+                dependencyEndpoints[val.app][val.name] = val;
+            })
         }
         return dependencyEndpoints;
+    }
+
+    PrivateDependencyEndpoints() {
+        var privateDependencyEndpoints = new(Map);
+        if (Config.data.privateEndpoints){
+            Config.data.privateEndpoints.forEach(function (val){
+                if (!privateDependencyEndpoints.has(val.app)) {
+                    privateDependencyEndpoints[val.app] = new(Map);
+                }
+                privateDependencyEndpoints[val.app][val.name] = val;
+            })
+        }
+        return privateDependencyEndpoints;
     }
 }
 
@@ -83,4 +88,5 @@ module.exports.KafkaTopics = cfg.KafkaTopics();
 module.exports.KafkaServers = cfg.KafkaServers();
 module.exports.ObjectBuckets = cfg.ObjectBuckets();
 module.exports.DependencyEndpoints = cfg.DependencyEndpoints();
+module.exports.PrivateDependencyEndpoints = cfg.PrivateDependencyEndpoints();
 module.exports.IsClowderEnabled = IsClowderEnabled;
