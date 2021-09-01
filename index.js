@@ -58,7 +58,7 @@ class Config {
                 if (!_.has(dependencyEndpoints, val.app)) {
                     dependencyEndpoints[val.app] = {};
                 }
-                dependencyEndpoints[val.app][val.name] = val
+                dependencyEndpoints[val.app][val.name] = val;
             })
         }
         return dependencyEndpoints;
@@ -71,7 +71,7 @@ class Config {
                 if (!_.has(privateDependencyEndpoints, val.app)) {
                     privateDependencyEndpoints[val.app] = {};
                 }
-                privateDependencyEndpoints[val.app][val.name] = val
+                privateDependencyEndpoints[val.app][val.name] = val;
             })
         }
         return privateDependencyEndpoints;
