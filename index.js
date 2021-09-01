@@ -66,7 +66,7 @@ class Config {
 
     PrivateDependencyEndpoints() {
         var privateDependencyEndpoints = {};
-        if (Config.data.privateEndpoints){
+        if (Config.data.privateEndpoints) {
             _.forEach(Config.data.privateEndpoints, val => {
                 if (!_.has(privateDependencyEndpoints, val.app)) {
                     privateDependencyEndpoints[val.app] = {};
