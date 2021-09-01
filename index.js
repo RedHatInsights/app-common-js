@@ -1,5 +1,6 @@
 const fs = require('fs');
 const tmp = require('tmp');
+const _ = require('lodash');
 
 class Config {
     constructor() {
@@ -51,26 +52,26 @@ class Config {
     }
 
     DependencyEndpoints() {
-        var dependencyEndpoints = new(Map);
-        if (Config.data.endpoints){
-            Config.data.endpoints.forEach(function (val){
-                if (!dependencyEndpoints.has(val.app)) {
-                    dependencyEndpoints[val.app] = new(Map);
+        var dependencyEndpoints = {};
+        if (Config.data.endpoints) {
+            _.forEach(Config.data.endpoints, val => {
+                if (!_.has(dependencyEndpoints, val.app)) {
+                    dependencyEndpoints[val.app] = {};
                 }
-                dependencyEndpoints[val.app][val.name] = val;
+                dependencyEndpoints[val.app][val.name] = val
             })
         }
         return dependencyEndpoints;
     }
 
     PrivateDependencyEndpoints() {
-        var privateDependencyEndpoints = new(Map);
+        var privateDependencyEndpoints = {};
         if (Config.data.privateEndpoints){
-            Config.data.privateEndpoints.forEach(function (val){
-                if (!privateDependencyEndpoints.has(val.app)) {
-                    privateDependencyEndpoints[val.app] = new(Map);
+            _.forEach(Config.data.privateEndpoints, val => {
+                if (!_.has(privateDependencyEndpoints, val.app)) {
+                    privateDependencyEndpoints[val.app] = {};
                 }
-                privateDependencyEndpoints[val.app][val.name] = val;
+                privateDependencyEndpoints[val.app][val.name] = val
             })
         }
         return privateDependencyEndpoints;
