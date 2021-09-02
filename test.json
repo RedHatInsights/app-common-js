@@ -69,6 +69,12 @@
             "app": "app2",
             "hostname": "endpoint2.svc",
             "port": 8000
+        },
+        {
+            "name": "endpoint2-1",
+            "app": "app2",
+            "hostname": "endpoint2-1.svc",
+            "port": 8000
         }
     ],
     "privateEndpoints": [
@@ -82,6 +88,12 @@
             "name": "endpoint2",
             "app": "app2",
             "hostname": "endpoint2.svc",
+            "port": 10000
+        },
+        {
+            "name": "endpoint2-1",
+            "app": "app2",
+            "hostname": "endpoint2-1.svc",
             "port": 10000
         }
     ]
