@@ -3,6 +3,7 @@
   "version": "1.4.0",
   "description": "Clowder client for Javascript",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "mocha"
   },

@@ -5,7 +5,18 @@ const _ = require('lodash');
 class Config {
     constructor() {
         if (!Config.data) {
-            console.log("Using config for Clowder at: " + process.env.ACG_CONFIG)
+            if(!IsClowderEnabled()) {
+                console.info("[clowder]: Clowder is not loaded. Bailing out.")
+                return
+            }
+            console.info("[clowder]: Using config for Clowder at: " + process.env.ACG_CONFIG)
+            
+            const configExists = fs.existsSync(process.env.ACG_CONFIG)
+            if (!configExists) {
+                console.info("[clowder]: Unable to load ACG_CONFIG at: " + process.env.ACG_CONFIG)
+                return
+            }
+
             let rawdata = fs.readFileSync(process.env.ACG_CONFIG);
             let jsonObject = JSON.parse(rawdata);
             Config.data = jsonObject;
@@ -23,7 +34,7 @@ class Config {
 
     KafkaTopics() {
         var topics = new(Map);
-        if (Config.data.kafka){
+        if (Config.data && Config.data.kafka){
             Config.data.kafka.topics.forEach(function (val){
                 topics[val.requestedName] = val;
             })
@@ -33,7 +44,7 @@ class Config {
 
     KafkaServers() {
         var brokers = new(Array);
-        if (Config.data.kafka){
+        if (Config.data && Config.data.kafka){
             Config.data.kafka.brokers.forEach(function (val){
                 brokers.push(val.hostname + ":" + val.port)
             })
@@ -43,7 +54,7 @@ class Config {
 
     ObjectBuckets() {
         var buckets = new(Map);
-        if (Config.data.objectStore){
+        if (Config.data && Config.data.objectStore){
             Config.data.objectStore.buckets.forEach(function (val){
                 buckets[val.requestedName] = val
             })
@@ -53,7 +64,7 @@ class Config {
 
     DependencyEndpoints() {
         var dependencyEndpoints = {};
-        if (Config.data.endpoints) {
+        if (Config.data && Config.data.endpoints) {
             _.forEach(Config.data.endpoints, val => {
                 if (!_.has(dependencyEndpoints, val.app)) {
                     dependencyEndpoints[val.app] = {};
@@ -66,7 +77,7 @@ class Config {
 
     PrivateDependencyEndpoints() {
         var privateDependencyEndpoints = {};
-        if (Config.data.privateEndpoints) {
+        if (Config.data && Config.data.privateEndpoints) {
             _.forEach(Config.data.privateEndpoints, val => {
                 if (!_.has(privateDependencyEndpoints, val.app)) {
                     privateDependencyEndpoints[val.app] = {};
@@ -78,11 +89,11 @@ class Config {
     }
 }
 
-function IsClowderEnabled() {
-    return Boolean(process.env.ACG_CONFIG)
-}
-
 cfg = new(Config)
+
+function IsClowderEnabled() {
+    return typeof process.env.ACG_CONFIG === 'string' && process.env.ACG_CONFIG !== 'undefined' 
+}
 
 module.exports.LoadedConfig = cfg.LoadedConfig();
 module.exports.KafkaTopics = cfg.KafkaTopics();

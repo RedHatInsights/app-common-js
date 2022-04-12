@@ -1,11 +1,12 @@
-const { fileSync } = require('tmp');
 const fs = require('fs');
+const path = require('path');
 
 var expect = require('chai').expect;
 
 describe('config()', function () {
   it('should have the right config', function () {
     
+    process.env.ACG_CONFIG = path.resolve(__dirname, '../test.json')
     var config = require('../index');
     
     expect(config.LoadedConfig).to.be.not.undefined;
@@ -24,5 +25,7 @@ describe('config()', function () {
     expect(data).to.be.equal("ca")
     expect(config.IsClowderEnabled()).to.be.equal(true)
     expect(config.LoadedConfig.featureFlags.hostname).to.be.equal("ff-server.server.example.com")
+
+    delete process.env.ACG_CONFIG
   });
 });
