@@ -7,6 +7,19 @@ export interface KafkaTopic {
 export interface KafkaBroker {
   hostname: string;
   port: number;
+  authType: string;
+  caCert: string;
+  saslConfig: KafkaSaslConfig;
+  securityProtocol: string;
+  // https://en.wikipedia.org/wiki/Network_socket#Socket_addresses
+  socketAddress: string;
+}
+
+export interface KafkaSaslConfig {
+  username: string;
+  password: string;
+  saslMechanism: string;
+  securityProtocol: string;
 }
 
 interface Endpoint {
@@ -33,6 +46,7 @@ export interface ClowderConfig {
   webPort: number;
   metricsPort: number;
   metricsPath: string;
+  tlsCAPath: string;
   logging: {
     type: string;
     cloudwatch: {
@@ -45,6 +59,12 @@ export interface ClowderConfig {
   kafka: {
     brokers: KafkaBroker[];
     topics: KafkaTopic[];
+  };
+  inMemoryDb: {
+    hostname: string;
+    password: string;
+    port: number;
+    username: string;
   };
   database: {
     name: string;

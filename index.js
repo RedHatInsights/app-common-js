@@ -43,10 +43,18 @@ class Config {
     }
 
     KafkaServers() {
-        var brokers = new(Array);
+        let brokers = [];
         if (Config.data && Config.data.kafka){
             Config.data.kafka.brokers.forEach(function (val){
-                brokers.push(val.hostname + ":" + val.port)
+                let broker = {}
+                broker.hostname = val.hostname;
+                broker.port = val.port;
+                broker.authType = val.authType;
+                broker.caCert = val.caCert;
+                broker.saslConfig = val.saslConfig;
+                broker.securityProtocol = val.securityProtocol;
+                broker.socketAddress = `${val.hostname}:${val.port}`;
+                brokers.push(broker);
             })
         }
         return brokers;
