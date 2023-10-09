@@ -1,7 +1,8 @@
 {
     "webPort": 8000,
     "metricsPort": 9000,
-    "metricsPath": "/metircs",
+    "metricsPath": "/metrics",
+    "tlsCAPath": "tlsPath",
     "logging": {
         "type": "cloudwatch",
         "cloudwatch": {
@@ -9,13 +10,14 @@
             "secretAccessKey": "SECRET_ACCESS_KEY",
             "region": "EU",
             "logGroup": "base_app"
-            }
-        },
+        }
+    },
     "kafka": {
         "brokers": [
             {
                 "hostname": "broker-host",
-                "port": 27015
+                "port": 27015,
+                "caCert": "kafkaca"
             }
         ],
         "topics": [
@@ -27,7 +29,7 @@
         ]
     },
     "database": {
-        "name": "dBaseName",
+        "name": "dbBaseName",
         "username": "username",
         "password": "password",
         "hostname": "hostname",
@@ -38,9 +40,15 @@
         "rdsCa": "ca",
         "sslMode": "verify-full"
     },
+    "inMemoryDb": {
+        "username": "username",
+        "password": "password",
+        "hostname": "hostname",
+        "port": 3131
+    },
     "objectStore": {
         "hostname": "endpoint",
-        "port" : 9292,
+        "port": 9292,
         "accessKey": "Testing",
         "secretKey": "Testing",
         "tls": false,
