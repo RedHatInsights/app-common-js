@@ -3,20 +3,33 @@ const tmp = require('tmp');
 const _ = require('lodash');
 
 class Config {
-    constructor() {
-        if (!Config.data) {
-            if(!IsClowderEnabled()) {
-                console.info("[clowder]: Clowder is not loaded. Bailing out.")
-                return
-            }
-            console.info("[clowder]: Using config for Clowder at: " + process.env.ACG_CONFIG)
-            
-            const configExists = fs.existsSync(process.env.ACG_CONFIG)
-            if (!configExists) {
-                console.info("[clowder]: Unable to load ACG_CONFIG at: " + process.env.ACG_CONFIG)
-                return
-            }
 
+    clowderDisabled = () => {
+        return !IsClowderEnabled();
+    }
+
+    configFileMissing = () => {
+        const fileExists = fs.existsSync(process.env.ACG_CONFIG);
+        return !fileExists;
+    }
+
+    configNotPopulated = () => {
+        return !Config.data;
+    }
+
+    constructor() {
+        if (this.configFileMissing()) {
+            console.info("[clowder]: Unable to load ACG_CONFIG at: " + process.env.ACG_CONFIG)
+            return
+        }
+        
+        if(this.clowderDisabled()) {
+            console.info("[clowder]: Clowder is not loaded. Bailing out.")
+            return
+        }
+
+        if (this.configNotPopulated()) {
+            console.info("[clowder]: Using config for Clowder at: " + process.env.ACG_CONFIG)
             let rawdata = fs.readFileSync(process.env.ACG_CONFIG);
             let jsonObject = JSON.parse(rawdata);
             Config.data = jsonObject;
@@ -33,7 +46,7 @@ class Config {
     }
 
     KafkaTopics() {
-        var topics = new(Map);
+        let topics = new(Map);
         if (Config.data && Config.data.kafka){
             Config.data.kafka.topics.forEach(function (val){
                 topics[val.requestedName] = val;
@@ -100,7 +113,7 @@ class Config {
 cfg = new(Config)
 
 function IsClowderEnabled() {
-    return typeof process.env.ACG_CONFIG === 'string' && process.env.ACG_CONFIG !== 'undefined' 
+    return process.env.ACG_CONFIG !== undefined && process.env.ACG_CONFIG !== ''; 
 }
 
 module.exports.LoadedConfig = cfg.LoadedConfig();

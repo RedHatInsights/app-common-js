@@ -9,8 +9,8 @@ describe('config()', function () {
     process.env.ACG_CONFIG = path.resolve(__dirname, '../test.json')
     var config = require('../index');
     
-    expect(config.LoadedConfig).to.be.not.undefined;
     expect(config.IsClowderEnabled()).to.be.equal(true)
+    expect(config.LoadedConfig).to.be.not.undefined;
     
     expect(config.LoadedConfig.tlsCAPath).to.be.equal("tlsPath")
 
