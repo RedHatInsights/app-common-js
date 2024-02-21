@@ -11,8 +11,6 @@ export interface KafkaBroker {
   caCert: string;
   saslConfig: KafkaSaslConfig;
   securityProtocol: string;
-  // https://en.wikipedia.org/wiki/Network_socket#Socket_addresses
-  socketAddress: string;
 }
 
 export interface KafkaSaslConfig {
@@ -22,11 +20,12 @@ export interface KafkaSaslConfig {
   securityProtocol: string;
 }
 
-interface Endpoint {
-  name?: string;
-  app?: string;
+export interface Endpoint {
+  name: string;
+  app: string;
   hostname?: string;
   port?: number;
+  tlsPort?: number;
 }
 
 export interface DependencyEndpoint {

@@ -1,11 +1,13 @@
 {
   "name": "app-common-js",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Clowder client for Javascript",
-  "main": "index.js",
+  "main": "index.ts",
+  "type": "module",
   "types": "index.d.ts",
   "scripts": {
-    "test": "mocha"
+    "test": "ts-mocha test/**/*.spec.ts",
+    "build": "tsc --build"
   },
   "directories": {
     "test": "test"
@@ -13,8 +15,16 @@
   "author": "Peter Savage",
   "license": "GPLv3",
   "devDependencies": {
+    "@types/chai": "^4.3.11",
+    "@types/jest": "^29.5.12",
+    "@types/lodash": "^4.14.202",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.17",
+    "@types/tmp": "^0.2.6",
     "chai": "^4.1.1",
-    "mocha": "^3.5.0"
+    "mocha": "^3.5.3",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "lodash": "^4.17.21",

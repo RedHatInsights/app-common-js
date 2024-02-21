@@ -15,5 +15,7 @@ jobs:
       - name: Install package and dependencies
         run: |
           npm install
+      - name: Run Build
+        run: npm run build
       - name: Run Tests
         run: ACG_CONFIG="test.json" npm test
