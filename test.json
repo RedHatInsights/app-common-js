@@ -17,7 +17,15 @@
             {
                 "hostname": "broker-host",
                 "port": 27015,
-                "caCert": "kafkaca"
+                "caCert": "kafkaca",
+                "socketAddress": "broker-host:27015",
+                "saslConfig": {
+                    "username": "test",
+                    "password": "test",
+                    "saslMechanism": "scram",
+                    "securityProtocol": "scram"
+                },
+                "securityProtocol": "scram"
             }
         ],
         "topics": [
