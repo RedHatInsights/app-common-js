@@ -2,12 +2,12 @@
   "name": "app-common-js",
   "version": "2.1.0",
   "description": "Clowder client for Javascript",
-  "main": "index.ts",
-  "type": "module",
-  "types": "index.d.ts",
+  "main": "build/index.ts",
+  "type": "commonjs",
+  "types": "build/index.d.ts",
   "scripts": {
     "test": "ts-mocha test/**/*.spec.ts",
-    "build": "tsc --build"
+    "build": "tsc --build --declaration"
   },
   "directories": {
     "test": "test"

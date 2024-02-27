@@ -8,6 +8,8 @@
 
     "strict": true /* Enable all strict type-checking options. */,
     "skipLibCheck": true,
-    "outDir": "build"
-  }
+    "outDir": "build",
+    "noEmit": false,
+  },
+  "files": ["index.ts"]
 }
