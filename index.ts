@@ -11,9 +11,9 @@ export interface KafkaTopic {
 export interface KafkaBroker {
   hostname: string;
   port: number;
-  authType: string;
+  authtype: string;
   caCert: string;
-  saslConfig: KafkaSaslConfig;
+  sasl: KafkaSaslConfig;
   securityProtocol: string;
 }
 
@@ -43,6 +43,9 @@ export interface ObjectBucket {
   secretKey: string;
   requestedName: string;
   name: string;
+  region: string;
+  tls: boolean;
+  endpoint: string;
 }
 
 export interface ClowderConfig {
@@ -170,9 +173,9 @@ export class Config {
         let broker: KafkaBroker = <KafkaBroker>{};
         broker.hostname = val.hostname;
         broker.port = val.port;
-        broker.authType = val.authType;
+        broker.authtype = val.authtype;
         broker.caCert = val.caCert;
-        broker.saslConfig = val.saslConfig;
+        broker.sasl = val.sasl;
         broker.securityProtocol = val.securityProtocol;
         brokers.push(broker);
       });
