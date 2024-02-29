@@ -18,8 +18,8 @@
                 "hostname": "broker-host",
                 "port": 27015,
                 "caCert": "kafkaca",
-                "socketAddress": "broker-host:27015",
-                "saslConfig": {
+                "authtype": "sasl",
+                "sasl": {
                     "username": "test",
                     "password": "test",
                     "saslMechanism": "scram",
@@ -65,7 +65,10 @@
                 "accessKey": "accessKey1",
                 "secretKey": "secretKey1",
                 "requestedName": "reqname",
-                "name": "name"
+                "name": "name",
+                "region": "us-east-1",
+                "tls": false,
+                "endpoint": "test.com"
             }
         ]
     },

@@ -36,6 +36,22 @@ describe('config()', function () {
     );
 
     expect(objectBuckets.get('reqname')?.name).to.be.equal('name');
+    expect(loadedConfig.objectStore.accessKey).to.be.equal('Testing');
+    expect(loadedConfig.objectStore.secretKey).to.be.equal('Testing');
+    expect(loadedConfig.objectStore.port).to.be.equal(9292);
+    expect(loadedConfig.objectStore.tls).to.be.equal(false);
+    expect(loadedConfig.objectStore.hostname).to.be.equal('endpoint');
+    expect(loadedConfig.objectStore.buckets[0].accessKey).to.be.equal(
+      'accessKey1'
+    );
+    expect(loadedConfig.objectStore.buckets[0].secretKey).to.be.equal(
+      'secretKey1'
+    );
+    expect(loadedConfig.objectStore.buckets[0].region).to.be.equal('us-east-1');
+    expect(loadedConfig.objectStore.buckets[0].endpoint).to.be.equal(
+      'test.com'
+    );
+    expect(loadedConfig.objectStore.buckets[0].tls).to.be.equal(false);
 
     expect(loadedConfig.database.name).to.be.equal('dbBaseName');
     expect(loadedConfig.database.hostname).to.be.equal('hostname');
@@ -53,14 +69,11 @@ describe('config()', function () {
     expect(kafkaServers[0].hostname).be.equal('broker-host');
     expect(kafkaServers[0].port).be.equal(27015);
     expect(kafkaServers[0].caCert).to.be.equal('kafkaca');
-    expect(loadedConfig.kafka.brokers[0].saslConfig.username).to.eq('test');
-    expect(loadedConfig.kafka.brokers[0].saslConfig.password).to.eq('test');
-    expect(loadedConfig.kafka.brokers[0].saslConfig.saslMechanism).to.eq(
-      'scram'
-    );
-    expect(loadedConfig.kafka.brokers[0].saslConfig.securityProtocol).to.eq(
-      'scram'
-    );
+    expect(loadedConfig.kafka.brokers[0].authtype).to.eq('sasl');
+    expect(loadedConfig.kafka.brokers[0].sasl.username).to.eq('test');
+    expect(loadedConfig.kafka.brokers[0].sasl.password).to.eq('test');
+    expect(loadedConfig.kafka.brokers[0].sasl.saslMechanism).to.eq('scram');
+    expect(loadedConfig.kafka.brokers[0].sasl.securityProtocol).to.eq('scram');
     expect(loadedConfig.kafka.brokers[0].securityProtocol).to.eq('scram');
 
     expect(loadedConfig.inMemoryDb.hostname).to.be.equal('hostname');
