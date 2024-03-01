@@ -12,7 +12,7 @@ export interface KafkaBroker {
   hostname: string;
   port: number;
   authtype: string;
-  caCert: string;
+  cacert: string;
   sasl: KafkaSaslConfig;
   securityProtocol: string;
 }
@@ -174,7 +174,7 @@ export class Config {
         broker.hostname = val.hostname;
         broker.port = val.port;
         broker.authtype = val.authtype;
-        broker.caCert = val.caCert;
+        broker.cacert = val.cacert;
         broker.sasl = val.sasl;
         broker.securityProtocol = val.securityProtocol;
         brokers.push(broker);

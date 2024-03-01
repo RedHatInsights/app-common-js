@@ -17,7 +17,7 @@
             {
                 "hostname": "broker-host",
                 "port": 27015,
-                "caCert": "kafkaca",
+                "cacert": "kafkaca",
                 "authtype": "sasl",
                 "sasl": {
                     "username": "test",
