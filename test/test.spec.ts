@@ -68,7 +68,7 @@ describe('config()', function () {
     expect(kafkaTopics.get('originalName')?.name).to.be.equal('someTopic');
     expect(kafkaServers[0].hostname).be.equal('broker-host');
     expect(kafkaServers[0].port).be.equal(27015);
-    expect(kafkaServers[0].caCert).to.be.equal('kafkaca');
+    expect(kafkaServers[0].cacert).to.be.equal('kafkaca');
     expect(loadedConfig.kafka.brokers[0].authtype).to.eq('sasl');
     expect(loadedConfig.kafka.brokers[0].sasl.username).to.eq('test');
     expect(loadedConfig.kafka.brokers[0].sasl.password).to.eq('test');

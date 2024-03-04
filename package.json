@@ -1,6 +1,6 @@
 {
   "name": "app-common-js",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Clowder client for Javascript",
   "main": "build/index.js",
   "type": "commonjs",
