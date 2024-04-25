@@ -8,15 +8,22 @@ Usage
 
 To access configuration, see the following example
 
+Javascript
+
+``` js
+const app_config = (acgConfig) ? new (require('app-common-js').Config)() : null;
+const loadedConfig = app_config ? app_config.LoadedConfig() : '';
+const dependencyEndpoints = app_config ? app_config.DependencyEndpoints() : '';
+const privateDepencencyEndpoints = app_config ? app_config.PrivateDependencyEndpoints() : '';
 ```
-loadedConfig = require('app-common-js').LoadedConfig
-isClowderEnabled = require('app-common-js').IsClowderEnabled
 
-
-function test() {
-    if IsClowderEnabled() {
-        console.Log("Public Port: %s", LoadedConfig.publicPort)
-    }
+Typescript
+``` ts
+const clowder: Config = new Config();
+isClowderEnabled = IsClowderEnabled();
+if (isClowderEnabled) {
+  const clowderConfig = clowder.LoadedConfig();
+  .... doThings();
 }
 ```
 
